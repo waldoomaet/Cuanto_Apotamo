@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cuanto_Apotamo.Views.LogInPage"
+             BackgroundColor="White">
+    <Grid 
+        Padding="30" 
+        RowDefinitions="Auto, Auto, Auto"
+        ColumnDefinitions="*,auto,*"
+        HorizontalOptions="Center"
+        Margin="0,50,0,30"
+        RowSpacing="25"
+        VerticalOptions="Center">
+        <Image Grid.Row="0"  Grid.Column="1" HorizontalOptions="Center" WidthRequest="300" Source="logo.png"/>
+
+        <Entry x:Name="usernameEntry" 
+               Text="{Binding Credentials.UserName}"
+               Grid.Row="1"
+               Grid.Column="0"
+               Grid.ColumnSpan="3"
+               Placeholder="Usuario"  
+               PlaceholderColor="Black" HeightRequest="40"
+               TextColor="Black"
+               Margin="5,0,5,0"/>
+
+        <Entry x:Name="passwordEntry" Text="{Binding Credentials.Password}" 
+               Grid.Row="2"
+               Grid.Column="0"
+               Grid.ColumnSpan="3"
+               Placeholder="Contraseña"   
+               PlaceholderColor="Black" 
+               HeightRequest="40"   
+               IsPassword="True"  
+               TextColor="Black"
+               Margin="5,0,5,0"/>
+
+
+        <Button Command="{Binding LogInCommand}" Text="Login" TextColor="White"  
+               Grid.Row="3"
+               Grid.Column="0"
+               Grid.ColumnSpan="3"
+               FontAttributes="Bold" FontSize="Large" 
+               HorizontalOptions="FillAndExpand"  
+               BackgroundColor="Black" 
+               />
+
+
+    </Grid>
+</ContentPage>

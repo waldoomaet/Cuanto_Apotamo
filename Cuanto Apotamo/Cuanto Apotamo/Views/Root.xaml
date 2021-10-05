@@ -7,6 +7,7 @@
         <ContentPage Title="Menu">
             <StackLayout>
                 <Button Text="Main Page" Command="{Binding NavigateCommand}" CommandParameter="Navigation/Main"/>
+                <Button Text="LogIn Page" Command="{Binding NavigateCommand}" CommandParameter="Navigation/LogIn"/>
                 <Button Text="SignUp Page" Command="{Binding NavigateCommand}" CommandParameter="Navigation/SignUp"/>
             </StackLayout>
         </ContentPage>

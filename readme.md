@@ -22,3 +22,9 @@ Final Project
 ## Alert popup
 
 <img src="SS\alert.png">
+
+<img src="SS\1.jfif">
+<img src="SS\2.jfif">
+<img src="SS\3.jfif">
+<img src="SS\4.jfif">
+<img src="SS\5.jfif">

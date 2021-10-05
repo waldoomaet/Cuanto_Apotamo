@@ -26,7 +26,9 @@ namespace Cuanto_Apotamo
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>(Constants.Navigation.MainPage);
             containerRegistry.RegisterForNavigation<Root, RootViewModel>(Constants.Navigation.Root);
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>(Constants.Navigation.SignUp);
+            containerRegistry.RegisterForNavigation<LogInPage, LogInViewModel>(Constants.Navigation.LogIn);
             containerRegistry.Register<ISignUpApiService, SignUpApiService>();
+            containerRegistry.Register<ILogInApiService, LogInApiService>();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Cuanto_Apotamo.Services
             public const string NavigationPage = "Navigation";
             public const string Root = "Root";
             public const string SignUp = "SignUp";
+            public const string LogIn = "LogIn";
         }
 
         public static class URL
