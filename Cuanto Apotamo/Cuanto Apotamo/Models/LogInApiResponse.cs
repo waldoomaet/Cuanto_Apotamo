@@ -9,6 +9,10 @@ namespace Cuanto_Apotamo.Models
     {
         [JsonPropertyName("status")]
         public string Status { get; set; }
+
+        [JsonPropertyName("data")]
+        public object Data { get; set; }
+
         [JsonPropertyName("errorMessage")]
         public string ErrorMessage { get; set; }
     }

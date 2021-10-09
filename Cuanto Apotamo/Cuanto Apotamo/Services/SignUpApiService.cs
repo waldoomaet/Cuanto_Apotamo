@@ -14,7 +14,7 @@ namespace Cuanto_Apotamo.Services
 
         public SignUpApiService()
         {
-            _client.BaseAddress = new Uri(Constants.URL.API);
+            _client.BaseAddress = new Uri(Constants.Url.Api);
         }
         public async Task<SignUpApiResponse> Create(User newUser)
         {

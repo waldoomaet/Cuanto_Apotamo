@@ -13,7 +13,7 @@ namespace Cuanto_Apotamo.Services
         private static HttpClient _client = new HttpClient();
         public LogInApiService()
         {
-            _client.BaseAddress = new Uri(Constants.URL.API);
+            _client.BaseAddress = new Uri(Constants.Url.Api);
         }
         public async Task<LogInApiResponse> Authenticate(Credentials userCredentials)
         {

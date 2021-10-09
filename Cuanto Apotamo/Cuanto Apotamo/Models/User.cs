@@ -33,5 +33,10 @@ namespace Cuanto_Apotamo.Models
 
         [JsonPropertyName("reEnteredPassword")]
         public string ReEnteredPassword { get; set; }
+
+        [JsonPropertyName("balance")]
+        public int Balance { get; set; }
+
+        public Dictionary<>
     }
 }

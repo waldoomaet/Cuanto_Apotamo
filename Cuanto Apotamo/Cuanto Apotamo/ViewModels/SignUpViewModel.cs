@@ -38,6 +38,8 @@ namespace Cuanto_Apotamo.ViewModels
                 {
                     User returnedUser = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
                     await _alertService.DisplayAlertAsync("Success!", $"{returnedUser.FullName} tu usuario fue creado satisfactoriamente!", "Ok");
+                    var navigationParams = new NavigationParameters { };
+                    await NavigationService.NavigateAsync($"/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Root}/{Constants.Navigation.MainPage}");
                 }
                 else if (response.Status == "fail")
                 {

@@ -9,6 +9,7 @@ namespace Cuanto_Apotamo.Models
     {
         [JsonPropertyName("userName")]
         public string UserName { get; set; }
+
         [JsonPropertyName("password")]
         public string Password { get; set; }
     }

@@ -17,7 +17,7 @@ namespace Cuanto_Apotamo
         protected override void OnInitialized()
         {
             InitializeComponent();
-            NavigationService.NavigateAsync($"{Constants.Navigation.Root}/{Constants.Navigation.NavigationPage}/{Constants.Navigation.MainPage}");
+            NavigationService.NavigateAsync($"/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Root}/{Constants.Navigation.MainPage}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -27,8 +27,8 @@ namespace Cuanto_Apotamo
             containerRegistry.RegisterForNavigation<Root, RootViewModel>(Constants.Navigation.Root);
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>(Constants.Navigation.SignUp);
             containerRegistry.RegisterForNavigation<LogInPage, LogInViewModel>(Constants.Navigation.LogIn);
-            containerRegistry.Register<ISignUpApiService, SignUpApiService>();
-            containerRegistry.Register<ILogInApiService, LogInApiService>();
+            containerRegistry.Register<ISignUpApiService, Dummy_services.SignUpApiService>();
+            containerRegistry.Register<ILogInApiService, Dummy_services.LogInApiService>();
         }
     }
 }

@@ -15,9 +15,9 @@ namespace Cuanto_Apotamo.Services
             public const string LogIn = "LogIn";
         }
 
-        public static class URL
+        public static class Url
         {
-            public const string API = "http://192.168.68.139:45457/";
+            public const string Api = "http://192.168.68.139:45457/";
         }
     }
 }

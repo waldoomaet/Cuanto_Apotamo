@@ -6,6 +6,7 @@ using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Windows.Input;
 using Xamarin.Essentials;
 
@@ -19,10 +20,15 @@ namespace Cuanto_Apotamo.ViewModels
         private ILogInApiService _logInService;
 
         public ICommand LogInCommand { get; set; }
+        public ICommand CreateAccountCommand { get; set; }
         public LogInViewModel(INavigationService navigationService, ILogInApiService LogInApiService, IPageDialogService dialogService) : base(navigationService)
         {
             Credentials = new Credentials();
             LogInCommand = new DelegateCommand(OnLogIn);
+            CreateAccountCommand = new DelegateCommand(async () => 
+            { 
+                await NavigationService.NavigateAsync($"{Constants.Navigation.SignUp}"); 
+            });
             _alertService = dialogService;
             _logInService = LogInApiService;
         }
@@ -34,6 +40,9 @@ namespace Cuanto_Apotamo.ViewModels
                 if (response.Status == "success")
                 {
                     await _alertService.DisplayAlertAsync("Success!", $"Tu usuario fue autenticado satisfactoriamente!", "Ok");
+                    // Have to change next line
+                    User returnedUser = (User)response.Data;
+                    await NavigationService.NavigateAsync($"/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Root}/{Constants.Navigation.MainPage}");
                 }
                 else if (response.Status == "fail")
                 {

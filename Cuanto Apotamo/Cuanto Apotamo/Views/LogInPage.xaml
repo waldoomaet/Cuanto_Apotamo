@@ -1,49 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Cuanto_Apotamo.Views.LogInPage"
-             BackgroundColor="White">
-    <Grid 
-        Padding="30" 
-        RowDefinitions="Auto, Auto, Auto"
-        ColumnDefinitions="*,auto,*"
-        HorizontalOptions="Center"
+<ContentPage
+    x:Class="Cuanto_Apotamo.Views.LogInPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="White">
+    <StackLayout
         Margin="0,50,0,30"
-        RowSpacing="25"
+        Padding="30"
+        HorizontalOptions="Center"
         VerticalOptions="Center">
-        <Image Grid.Row="0"  Grid.Column="1" HorizontalOptions="Center" WidthRequest="300" Source="logo.png"/>
+        <Image
+            HorizontalOptions="Center"
+            Source="logo.png"
+            WidthRequest="300" />
 
-        <Entry x:Name="usernameEntry" 
-               Text="{Binding Credentials.UserName}"
-               Grid.Row="1"
-               Grid.Column="0"
-               Grid.ColumnSpan="3"
-               Placeholder="Usuario"  
-               PlaceholderColor="Black" HeightRequest="40"
-               TextColor="Black"
-               Margin="5,0,5,0"/>
+        <Entry
+            Margin="5,0,5,5"
+            HeightRequest="40"
+            Placeholder="Usuario"
+            PlaceholderColor="Black"
+            Text="{Binding Credentials.UserName}"
+            TextColor="Black" />
 
-        <Entry x:Name="passwordEntry" Text="{Binding Credentials.Password}" 
-               Grid.Row="2"
-               Grid.Column="0"
-               Grid.ColumnSpan="3"
-               Placeholder="Contraseña"   
-               PlaceholderColor="Black" 
-               HeightRequest="40"   
-               IsPassword="True"  
-               TextColor="Black"
-               Margin="5,0,5,0"/>
-
-
-        <Button Command="{Binding LogInCommand}" Text="Login" TextColor="White"  
-               Grid.Row="3"
-               Grid.Column="0"
-               Grid.ColumnSpan="3"
-               FontAttributes="Bold" FontSize="Large" 
-               HorizontalOptions="FillAndExpand"  
-               BackgroundColor="Black" 
-               />
+        <Entry
+            Margin="5,0,5,10"
+            HeightRequest="40"
+            IsPassword="True"
+            Placeholder="Contraseña"
+            PlaceholderColor="Black"
+            Text="{Binding Credentials.Password}"
+            TextColor="Black" />
 
 
-    </Grid>
+        <Button
+            Margin="0,0,0,10"
+            BackgroundColor="Black"
+            Command="{Binding LogInCommand}"
+            FontAttributes="Bold"
+            FontSize="Large"
+            HorizontalOptions="FillAndExpand"
+            Text="Login"
+            TextColor="White" />
+
+        <Label HorizontalOptions="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span FontSize="Medium" Text="¿No tienes cuenta? " />
+                    <Span
+                        FontSize="Medium"
+                        Text="¡Crea una!"
+                        TextColor="Blue"
+                        TextDecorations="Underline">
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CreateAccountCommand}"/>
+                        </Span.GestureRecognizers>
+                    </Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </StackLayout>
 </ContentPage>
