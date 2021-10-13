@@ -17,11 +17,13 @@ namespace Cuanto_Apotamo
         protected override void OnInitialized()
         {
             InitializeComponent();
-            NavigationService.NavigateAsync($"/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Root}/{Constants.Navigation.MainPage}");
+            NavigationService.NavigateAsync($"{Constants.Navigation.Root}/{Constants.Navigation.NavigationPage}/{Constants.Navigation.MainPage}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<BalancePage>("balance");
+            containerRegistry.RegisterForNavigation<SearchPage>("search");
             containerRegistry.RegisterForNavigation<NavigationPage>(Constants.Navigation.NavigationPage);
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>(Constants.Navigation.MainPage);
             containerRegistry.RegisterForNavigation<Root, RootViewModel>(Constants.Navigation.Root);
