@@ -9,6 +9,7 @@
                 <Button Text="Main Page" Command="{Binding NavigateCommand}" CommandParameter="Navigation/Main"/>
                 <Button Text="LogIn Page" Command="{Binding NavigateCommand}" CommandParameter="Navigation/LogIn"/>
                 <Button Text="SignUp Page" Command="{Binding NavigateCommand}" CommandParameter="Navigation/SignUp"/>
+                <Button Text="Temp Page" Command="{Binding NavigateCommand}" CommandParameter="Navigation/Temp"/>
             </StackLayout>
         </ContentPage>
     </FlyoutPage.Flyout>

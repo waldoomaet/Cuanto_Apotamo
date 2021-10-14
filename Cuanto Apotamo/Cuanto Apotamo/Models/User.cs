@@ -37,6 +37,6 @@ namespace Cuanto_Apotamo.Models
         [JsonPropertyName("balance")]
         public int Balance { get; set; }
 
-        public Dictionary<>
+        //public Dictionary<>
     }
 }
