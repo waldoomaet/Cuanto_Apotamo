@@ -2,14 +2,104 @@
 <FlyoutPage
     x:Class="Cuanto_Apotamo.Views.Root"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="rootPage">
+    <FlyoutPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Balance"
+            Priority="0"
+            Text="{Binding Money}" />
+        <ToolbarItem
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Search"
+            IconImageSource="search"
+            Priority="1" />
+    </FlyoutPage.ToolbarItems>
     <FlyoutPage.Flyout>
         <ContentPage Title="Menu">
             <StackLayout>
-                <Button Text="Main Page" Command="{Binding NavigateCommand}" CommandParameter="Navigation/Main"/>
-                <Button Text="LogIn Page" Command="{Binding NavigateCommand}" CommandParameter="Navigation/LogIn"/>
-                <Button Text="SignUp Page" Command="{Binding NavigateCommand}" CommandParameter="Navigation/SignUp"/>
-                <Button Text="Temp Page" Command="{Binding NavigateCommand}" CommandParameter="Navigation/Temp"/>
+                <StackLayout Margin="0,20,0,10" Orientation="Horizontal">
+                    <Image Source="home" Style="{StaticResource FlyoutOptionLeftImage}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Main" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Style="{StaticResource FlyoutOptionLabel}" Text="Home">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Main" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <StackLayout Margin="0,0,0,10" Orientation="Horizontal">
+                    <Image Source="fire" Style="{StaticResource FlyoutOptionLeftImage}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Main" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Style="{StaticResource FlyoutOptionLabel}" Text="Home">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Main" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <BoxView IsVisible="{Binding HasFavorites}" Style="{StaticResource FlyoutSectionDividerBoxView}" />
+                <Label
+                    IsVisible="{Binding HasFavorites}"
+                    Style="{StaticResource FlyoutSectionLabel}"
+                    Text="Favoritos" />
+                <CollectionView
+                    IsVisible="{Binding HasFavorites}"
+                    ItemsSource="{Binding FavoriteFlyoutOptions}"
+                    SelectedItem="{Binding SelectedFavoriteFlyoutOption}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0,0,0,10" Orientation="Horizontal">
+                                <Image Source="grass" Style="{StaticResource FlyoutOptionLeftImage}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateCommand}" CommandParameter="{Binding Title}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Style="{StaticResource FlyoutOptionLabel}" Text="{Binding Title}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateCommand}" CommandParameter="{Binding Title}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Image Source="filled_star" Style="{StaticResource FlyoutOptionRigthColoredImage}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.StarCommand}" CommandParameter="{Binding}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <BoxView Style="{StaticResource FlyoutSectionDividerBoxView}" />
+                <Label Style="{StaticResource FlyoutSectionLabel}" Text="Categorias" />
+                <CollectionView ItemsSource="{Binding FlyoutOptions}" SelectedItem="{Binding SelectedFlyoutOption}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0,0,0,10" Orientation="Horizontal">
+                                <Image Source="grass" Style="{StaticResource FlyoutOptionLeftImage}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateCommand}" CommandParameter="{Binding Title}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Style="{StaticResource FlyoutOptionLabel}" Text="{Binding Title}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateCommand}" CommandParameter="{Binding Title}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Image Source="outlined_star" Style="{StaticResource FlyoutOptionRigthImage}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.StarCommand}" CommandParameter="{Binding}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </StackLayout>
         </ContentPage>
     </FlyoutPage.Flyout>

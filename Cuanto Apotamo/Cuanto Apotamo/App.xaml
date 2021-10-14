@@ -1,9 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             x:Class="Cuanto_Apotamo.App">
+<prism:PrismApplication
+    x:Class="Cuanto_Apotamo.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <Style x:Key="FlyoutOptionLabel" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="FlyoutSectionLabel" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style x:Key="FlyoutOptionLeftImage" TargetType="Image">
+                <Setter Property="Margin" Value="0,0,10,0"/>
+                <Setter Property="WidthRequest" Value="45" />
+            </Style>
+            <Style x:Key="FlyoutOptionRigthImage" TargetType="Image">
+                <Setter Property="Margin" Value="0,0,10,0" />
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                <Setter Property="WidthRequest" Value="45" />
+            </Style>
+            <Style x:Key="FlyoutOptionRigthColoredImage" TargetType="Image">
+                <Setter Property="Margin" Value="0,0,10,0" />
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                <Setter Property="WidthRequest" Value="45" />
+                <Setter Property="xct:IconTintColorEffect.TintColor" Value="DarkOrange"/>
+            </Style>
+            <Style x:Key="FlyoutSectionDividerBoxView" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="2"/>
+                <Setter Property="WidthRequest" Value="100"/>
+                <Setter Property="Color" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

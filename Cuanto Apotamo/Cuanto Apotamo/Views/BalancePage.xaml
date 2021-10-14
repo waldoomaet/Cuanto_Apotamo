@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Cuanto_Apotamo.Views.BalancePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="0,0,0,30" Padding="30">
+
+                <Image
+                    HorizontalOptions="Center"
+                    Source="logo.png"
+                    VerticalOptions="Start"
+                    WidthRequest="200" />
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="36"
+                    HorizontalOptions="Center"
+                    Text="Balance:"
+                    TextColor="Black" />
+
+                <Label
+                    Margin="0,15,0,15"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    Text="$200"
+                    TextColor="Black" />
+
+                <Grid ColumnDefinitions="*,*">
+                    <Button
+                        Grid.Column="0"
+                        FontAttributes="None"
+                        Text="Agregar al balance" />
+                    <Button
+                        Grid.Column="1"
+                        FontAttributes="None"
+                        Text="Retirar al banco" />
+                </Grid>
+
+                <Label
+                    Margin="0,30,0,20"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    Text="Historial de transacciones"
+                    TextColor="Black" />
+
+                <Frame BorderColor="Black">
+                    <StackLayout>
+                        <BindableLayout.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>This must be changed for an API call that brings the latest transactions</x:String>
+                                <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
+                                <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
+                                <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
+                                <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
+                                <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
+                                <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
+                                <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
+                                <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
+                                <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
+                            </x:Array>
+                        </BindableLayout.ItemsSource>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Label FontSize="Medium" TextColor="Black">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="*   " />
+                                            <Span Text="{Binding}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
