@@ -6,7 +6,6 @@ using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.Json;
 using System.Windows.Input;
 using Xamarin.Essentials;
 
@@ -25,9 +24,9 @@ namespace Cuanto_Apotamo.ViewModels
         {
             Credentials = new Credentials();
             LogInCommand = new DelegateCommand(OnLogIn);
-            CreateAccountCommand = new DelegateCommand(async () => 
-            { 
-                await NavigationService.NavigateAsync($"{Constants.Navigation.SignUp}"); 
+            CreateAccountCommand = new DelegateCommand(async () =>
+            {
+                await NavigationService.NavigateAsync($"{Constants.Navigation.SignUp}");
             });
             _alertService = dialogService;
             _logInService = LogInApiService;
@@ -42,7 +41,8 @@ namespace Cuanto_Apotamo.ViewModels
                     await _alertService.DisplayAlertAsync("Success!", $"Tu usuario fue autenticado satisfactoriamente!", "Ok");
                     // Have to change next line
                     User returnedUser = (User)response.Data;
-                    await NavigationService.NavigateAsync($"/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Root}/{Constants.Navigation.MainPage}");
+                    var nav = new NavigationParameters(); // Tengo que poner returnedUser aqui
+                    await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/tabbed", nav);
                 }
                 else if (response.Status == "fail")
                 {

@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Cuanto_Apotamo.ViewModels
 {
-    class MainPageViewModel : BaseViewModel
+    class MainViewModel : BaseViewModel
     {
         public string Text => "Hello world";
-        public MainPageViewModel(INavigationService navigationService) : base(navigationService)
+        public MainViewModel(INavigationService navigationService) : base(navigationService)
         {
 
         }
