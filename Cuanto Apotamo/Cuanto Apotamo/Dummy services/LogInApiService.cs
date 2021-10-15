@@ -31,7 +31,7 @@ namespace Cuanto_Apotamo.Dummy_services
                     CreditCardNumber = 1234567812345678,
                     CVV = 123,
                     CreditCardExpirationDate = DateTime.Now,
-                    Balance = 100
+                    Balance = 100.23f
                 };
                 return new LogInApiResponse() { Status = "success", Data = foundUser, ErrorMessage = "" };
             }

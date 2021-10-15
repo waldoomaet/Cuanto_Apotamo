@@ -13,6 +13,7 @@ namespace Cuanto_Apotamo.Services
             public const string Root = "Root";
             public const string SignUp = "SignUp";
             public const string LogIn = "LogIn";
+            public const string Temp = "Temp";
         }
 
         public static class Url
