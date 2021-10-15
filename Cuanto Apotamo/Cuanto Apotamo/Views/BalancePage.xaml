@@ -25,8 +25,14 @@
                     FontAttributes="Bold"
                     FontSize="20"
                     HorizontalOptions="Center"
-                    Text="$200"
-                    TextColor="Black" />
+                    TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="$" />
+                            <Span Text="{Binding User.Balance}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
                 <Grid ColumnDefinitions="*,*">
                     <Button

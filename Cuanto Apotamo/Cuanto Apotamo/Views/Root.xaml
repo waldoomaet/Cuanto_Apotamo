@@ -3,17 +3,17 @@
     x:Class="Cuanto_Apotamo.Views.Root"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    x:Name="rootPage">
+    x:Name="rootPage"
+    Title="Root">
     <FlyoutPage.ToolbarItems>
         <ToolbarItem
             Command="{Binding NavigateCommand}"
-            CommandParameter="Balance"
+            CommandParameter="balance"
             Priority="0"
             Text="{Binding Money}" />
         <ToolbarItem
             Command="{Binding NavigateCommand}"
-            CommandParameter="Search"
+            CommandParameter="search"
             IconImageSource="search"
             Priority="1" />
     </FlyoutPage.ToolbarItems>
@@ -23,24 +23,24 @@
                 <StackLayout Margin="0,20,0,10" Orientation="Horizontal">
                     <Image Source="home" Style="{StaticResource FlyoutOptionLeftImage}">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Main" />
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="tabbed" />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Label Style="{StaticResource FlyoutOptionLabel}" Text="Home">
+                    <Label Style="{StaticResource FlyoutOptionLabel}" Text="OtherHome">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Main" />
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="tabbed" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
                 <StackLayout Margin="0,0,0,10" Orientation="Horizontal">
                     <Image Source="fire" Style="{StaticResource FlyoutOptionLeftImage}">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Main" />
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="tabbed" />
                         </Image.GestureRecognizers>
                     </Image>
                     <Label Style="{StaticResource FlyoutOptionLabel}" Text="Home">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Main" />
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="tabbed" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>

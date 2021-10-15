@@ -10,11 +10,12 @@ using Xamarin.Forms.Xaml;
 namespace Cuanto_Apotamo.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TabbedPage : ContentPage
+    public partial class RootTabbedPage : TabbedPage
     {
-        public TabbedPage()
+        public RootTabbedPage()
         {
             InitializeComponent();
         }
+
     }
 }

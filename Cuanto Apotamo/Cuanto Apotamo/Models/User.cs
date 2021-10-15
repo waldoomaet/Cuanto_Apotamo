@@ -1,12 +1,16 @@
-﻿using System;
+﻿using Prism.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Cuanto_Apotamo.Models
 {
-    class User
+    class User : NavigationParameterManager
     {
+        public User() { }
+        public User(INavigationParameters navigationParameters) : base(navigationParameters) { }
+
         [JsonPropertyName("fullName")]
         public string FullName { get; set; }
 
@@ -35,6 +39,6 @@ namespace Cuanto_Apotamo.Models
         public string ReEnteredPassword { get; set; }
 
         [JsonPropertyName("balance")]
-        public int Balance { get; set; }
+        public float Balance { get; set; }
     }
 }
