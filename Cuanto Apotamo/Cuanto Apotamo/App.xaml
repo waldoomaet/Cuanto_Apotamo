@@ -37,6 +37,17 @@
                 <Setter Property="WidthRequest" Value="100"/>
                 <Setter Property="Color" Value="Black"/>
             </Style>
+            <Style x:Key="TitleLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="DescriptionLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Gray"/>
+                <Setter Property="FontAttributes" Value="Italic"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="Small"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

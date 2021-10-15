@@ -3,8 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Cuanto_Apotamo.Views.TempPage"
              xmlns:views="clr-namespace:Cuanto_Apotamo.Views">
-
-     <views:BetView
-            BindingContext="{Binding Bet}"
-        />
+    <StackLayout        
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+        
+        <views:BetView
+            BindingContext="{Binding Bet}" />
+    </StackLayout>
+     
+    
 </ContentPage>

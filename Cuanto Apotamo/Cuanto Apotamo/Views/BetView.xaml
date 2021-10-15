@@ -2,12 +2,23 @@
 <Frame xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Cuanto_Apotamo.Views.BetView">
-    <StackLayout  >
-        <Label Text="{Binding Title}" />
-        <Label Text="{Binding TotalBet}"  />
-        <Label Text="{Binding Deal}" />
-        <Label Text="{Binding BetClose}"  />
-    </StackLayout>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Text="holaaaaaaaaaaa" Style="{StaticResource TitleLabelStyle}" />
+        <Label Text="{Binding Title}" Style="{StaticResource TitleLabelStyle}" />
+        <Label Text="{Binding TotalBet}"   Style="{StaticResource TitleLabelStyle}"/>
+        <Label Text="{Binding Deal}"  Style="{StaticResource TitleLabelStyle}"/>
+        <Label Text="{Binding BetClose}"   Style="{StaticResource TitleLabelStyle}"/>
+    </Grid>
 
 
 </Frame>
