@@ -8,4 +8,4 @@ Final Project
 <img src="SS\2.jfif">
 <img src="SS\4.jfif">
 <img src="SS\3.jfif">
-<img src="SS\5.jfif">
+<img src="SS\6.jfif">
