@@ -60,7 +60,7 @@ namespace Cuanto_Apotamo.ViewModels
                     {
                         await _alertService.DisplayAlertAsync("Success!", $"Tu usuario fue autenticado satisfactoriamente!", "Ok");
                         //var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
-                        var user = (User)response.Data;
+                        var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
                         await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/tabbed", user.ToNavigationParameters());
                     }
                     else if (response.Status == "fail")

@@ -25,6 +25,7 @@ namespace Cuanto_Apotamo.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            Plugin.Segmented.Control.iOS.SegmentedControlRenderer.Initialize();
             LoadApplication(new App( new IosPlatformInitializer()));
 
             return base.FinishedLaunching(app, options);

@@ -16,5 +16,21 @@ namespace Cuanto_Apotamo.Views
         {
             InitializeComponent();
         }
+        //private void OnSegmentSelected(object sender, Plugin.Segmented.Event.SegmentSelectEventArgs e)
+        //{
+        //    var selectedIndex = e.NewValue;
+        //    switch (selectedIndex)
+        //    {
+        //        case 0:
+        //            selectedValue.Text = "1";
+        //            break;
+        //        case 1:
+        //            selectedValue.Text = "2";
+        //            break;
+        //        case 2:
+        //            selectedValue.Text = "3";
+        //            break;
+        //    }
+        //}
     }
 }

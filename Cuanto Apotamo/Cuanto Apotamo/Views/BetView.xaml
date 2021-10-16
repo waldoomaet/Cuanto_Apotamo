@@ -1,24 +1,105 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Frame xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Cuanto_Apotamo.Views.BetView">
-
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Frame
+    x:Class="Cuanto_Apotamo.Views.BetView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:control="clr-namespace:Plugin.Segmented.Control;assembly=Plugin.Segmented"
+    x:Name="tabbedView"
+    Margin="10"
+    Padding="8"
+    BorderColor="Gray"
+    CornerRadius="5">
+    <Frame.GestureRecognizers>
+        <TapGestureRecognizer Command="{Binding Path=BindingContext.TestCommand}">
+            
+        </TapGestureRecognizer>
+    </Frame.GestureRecognizers>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="100" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Label Text="holaaaaaaaaaaa" Style="{StaticResource TitleLabelStyle}" />
-        <Label Text="{Binding Title}" Style="{StaticResource TitleLabelStyle}" />
-        <Label Text="{Binding TotalBet}"   Style="{StaticResource TitleLabelStyle}"/>
-        <Label Text="{Binding Deal}"  Style="{StaticResource TitleLabelStyle}"/>
-        <Label Text="{Binding BetClose}"   Style="{StaticResource TitleLabelStyle}"/>
+
+        <Label
+            Grid.Row="0"
+            Grid.ColumnSpan="6"
+            Style="{StaticResource TitleLabelStyle}"
+            Text="{Binding Title}" />
+        <BoxView
+            Grid.Row="1"
+            Grid.ColumnSpan="6"
+            HeightRequest="2"
+            HorizontalOptions="Fill"
+            Color="Gray" />
+        <Label
+            Grid.Row="2"
+            Grid.ColumnSpan="6"
+            Style="{StaticResource TitleLabelStyle}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Cierre de apuesta: " />
+                    <Span Text="{Binding BetClose}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Style="{StaticResource TitleLabelStyle}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Total apostado: $" />
+                    <Span Text="{Binding TotalBets}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label
+            Grid.Row="3"
+            Grid.Column="3"
+            Grid.ColumnSpan="3"
+            Style="{StaticResource TitleLabelStyle}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Total jugadores: " />
+                    <Span Text="{Binding TotalPlayers}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <control:SegmentedControl
+            x:Name="SegmentedControl"
+            Grid.Row="4"
+            Grid.Column="1"
+            Grid.ColumnSpan="4"
+            DisabledColor="Gray"
+            SegmentSelectedCommand="{Binding SelectCommand}"
+            SelectedSegment="0"
+            SelectedTextColor="White"
+            TextColor="Black"
+            TintColor="Blue">
+            <control:SegmentedControl.Children>
+                <control:SegmentedControlOption Text="option 1" />
+                <control:SegmentedControlOption Text="option 2" />
+                <control:SegmentedControlOption Text="option 3" />
+            </control:SegmentedControl.Children>
+        </control:SegmentedControl>
+        <Label
+            Grid.Row="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="4"
+            Style="{StaticResource TitleLabelStyle}"
+            Text="{Binding Label}" />
     </Grid>
-
-
 </Frame>
