@@ -11,14 +11,7 @@
                     HorizontalOptions="Center"
                     Source="logo.png"
                     VerticalOptions="Start"
-                    WidthRequest="200" />
-
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="36"
-                    HorizontalOptions="Center"
-                    Text="Balance:"
-                    TextColor="Black" />
+                    WidthRequest="200" />               
 
                 <Label
                     Margin="0,15,0,15"
@@ -28,21 +21,41 @@
                     TextColor="Black">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="$" />
-                            <Span Text="{Binding User.Balance}" />
+                            <Span FontAttributes="Bold" FontSize="36" Text="Balance:" TextColor="Black" />
+                            <Span Text="$" FontAttributes="Bold"  FontSize="20" TextColor="Black" />
+                            <Span Text="{Binding User.Balance}" FontAttributes="Bold"  FontSize="20" TextColor="Black" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
-                <Grid ColumnDefinitions="*,*">
-                    <Button
-                        Grid.Column="0"
-                        FontAttributes="None"
-                        Text="Agregar al balance" />
-                    <Button
+                
+
+                <Grid ColumnDefinitions="*,50,50,*" RowDefinitions="*,*">
+                    <Entry
+                        Grid.Row="0"
                         Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Margin="5,0,5,10"
+                        HeightRequest="40"
+                        WidthRequest="50"
+                        Keyboard="Numeric"
+                        Text="{Binding OperationAmount}"
+                        TextColor="Black" 
+                        HorizontalTextAlignment="Center"/>
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
                         FontAttributes="None"
-                        Text="Retirar al banco" />
+                        Text="Agregar al balance"
+                        Command="{Binding DepositCommand}"/>
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Grid.ColumnSpan="2"
+                        FontAttributes="None"
+                        Text="Retirar al banco"
+                        Command="{Binding WithdrawCommand}"/>
                 </Grid>
 
                 <Label

@@ -23,7 +23,7 @@ namespace Cuanto_Apotamo
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<RootTabbedPage, RootTabbedViewModel>("tabbed");
-            containerRegistry.RegisterForNavigation<BalancePage, BalancePageViewModel>("balance");
+            containerRegistry.RegisterForNavigation<BalancePage, BalanceViewModel>("balance");
             containerRegistry.RegisterForNavigation<SearchPage>("search");
             containerRegistry.RegisterForNavigation<NavigationPage>(Constants.Navigation.NavigationPage);
             containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(Constants.Navigation.MainPage);

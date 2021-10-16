@@ -10,5 +10,7 @@ namespace Cuanto_Apotamo.Services
     {
         Task<ApiResponse> Authenticate(Credentials userCredentials);
         Task<ApiResponse> Create(SignUpForm newUser);
+        Task<ApiResponse> Deposit(TransactionForm transaction);
+        Task<ApiResponse> Withdraw(TransactionForm transaction);
     }
 }

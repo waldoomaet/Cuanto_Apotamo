@@ -29,5 +29,18 @@ namespace Cuanto_Apotamo.Services
             var responseString = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<ApiResponse>(responseString);
         }
+
+        public async Task<ApiResponse> Deposit(TransactionForm transaction)
+        {
+            var response = await _client.PostAsync("Users/Deposit", new StringContent(JsonSerializer.Serialize(transaction), Encoding.UTF8, "application/json"));
+            var responseString = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<ApiResponse>(responseString);
+        }
+        public async Task<ApiResponse> Withdraw(TransactionForm transaction)
+        {
+            var response = await _client.PostAsync("Users/Withdraw", new StringContent(JsonSerializer.Serialize(transaction), Encoding.UTF8, "application/json"));
+            var responseString = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<ApiResponse>(responseString);
+        }
     }
 }

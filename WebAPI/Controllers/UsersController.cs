@@ -112,5 +112,98 @@ namespace WebAPI.Controllers
                 return StatusCode(500, new ErrorResponse(err.Message));
             }
         }
+        [HttpPost]
+        [Route("Deposit")]
+        public async Task<ActionResult<IResponse>> Deposit(TransactionForm transactionrequest)
+        {
+            try
+            {
+                
+
+                // Basic validation to assure that any property is null                
+                if (transactionrequest.UserID==0||transactionrequest.Balance==0)
+                {                    
+                    return BadRequest(new FailResponse("Cannot create a transaction with 0 balance value or no userID"));
+                }
+                
+                BalanceTransaction balanceTransaction = new BalanceTransaction()
+                {
+                   UserID = transactionrequest.UserID,
+                   Balance = transactionrequest.Balance
+                };
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var user = _context.Users.FirstOrDefault(u => u.Id == transactionrequest.UserID);
+                        if (user is null)
+                        {
+                            return BadRequest(new FailResponse("User no longer exist."));
+                        }
+                        user.Balance += transactionrequest.Balance;
+                        _context.BalanceTransactions.Add(balanceTransaction);
+                        await _context.SaveChangesAsync();
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw new Exception("An error has ocurred in the database transaction.", ex);
+                    }
+                }
+                
+                return Ok(new SuccessResponse(_context.Users.Find(balanceTransaction.UserID)));
+            }
+            catch (Exception err)
+            {
+                return StatusCode(500, new ErrorResponse(err.Message));
+            }
+        }
+
+        [HttpPost]
+        [Route("Withdraw")]
+        public async Task<ActionResult<IResponse>> Withdraw(TransactionForm transactionrequest)
+        {
+            try
+            {
+                // Basic validation to assure that any property is null                
+                if (transactionrequest.UserID == 0 || transactionrequest.Balance == 0)
+                {
+                    return BadRequest(new FailResponse("Cannot create a transaction with 0 balance value or no userID"));
+                }
+
+                BalanceTransaction balanceTransaction = new BalanceTransaction()
+                {
+                    UserID = transactionrequest.UserID,
+                    Balance = transactionrequest.Balance* -1
+                };
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var user = _context.Users.FirstOrDefault(u => u.Id == transactionrequest.UserID);
+                        if (user is null)
+                        {
+                            return BadRequest(new FailResponse("User no longer exist."));
+                        }
+                        user.Balance -= transactionrequest.Balance;
+                        _context.BalanceTransactions.Add(balanceTransaction);
+                        await _context.SaveChangesAsync();
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw new Exception("An error has ocurred in the database transaction.", ex);
+                    }
+                }
+
+                return Ok(new SuccessResponse(_context.Users.Find(balanceTransaction.UserID)));
+            }
+            catch (Exception err)
+            {
+                return StatusCode(500, new ErrorResponse(err.Message));
+            }
+        }
     }
 }
