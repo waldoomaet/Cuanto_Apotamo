@@ -3,6 +3,7 @@
     x:Class="Cuanto_Apotamo.Views.LogInPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:Cuanto_Apotamo.Effects"
     BackgroundColor="White">
     <StackLayout
         Margin="0,50,0,30"
@@ -20,7 +21,11 @@
             Placeholder="Username"
             PlaceholderColor="Black"
             Text="{Binding Credentials.UserName}"
-            TextColor="Black" />
+            TextColor="Black">
+            <Entry.Effects>
+                <effects:FocusEffect />
+            </Entry.Effects>
+        </Entry>
 
         <Entry
             Margin="5,0,5,20"
@@ -29,7 +34,11 @@
             Placeholder="Password"
             PlaceholderColor="Black"
             Text="{Binding Credentials.Password}"
-            TextColor="Black" />
+            TextColor="Black">
+            <Entry.Effects>
+                <effects:FocusEffect />
+            </Entry.Effects>
+        </Entry>
 
         <Button
             Margin="0,0,0,20"
@@ -44,7 +53,10 @@
         <Label HorizontalOptions="Center">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span FontSize="Medium" Text="Don't have an account? " TextColor="Black"/>
+                    <Span
+                        FontSize="Medium"
+                        Text="Don't have an account? "
+                        TextColor="Black" />
                     <Span
                         FontSize="Medium"
                         Text="Create one!"

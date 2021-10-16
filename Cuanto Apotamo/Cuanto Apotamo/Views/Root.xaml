@@ -8,18 +8,13 @@
     <FlyoutPage.ToolbarItems>
         <ToolbarItem
             Command="{Binding NavigateWithUserCommand}"
-            CommandParameter="Balance"
-            Priority="0"
-            Text="{Binding Money}" />
-        <ToolbarItem
-            Command="{Binding NavigateWithUserCommand}"
             CommandParameter="Search"
-            Priority="1"
+            Priority="0"
             IconImageSource="search"/>
         <ToolbarItem
             Command="{Binding NavigateCommand}"
             CommandParameter="LogIn"
-            Priority="2"
+            Priority="1"
             IconImageSource="logout"/>
     </FlyoutPage.ToolbarItems>
     <FlyoutPage.Flyout>

@@ -30,7 +30,7 @@ namespace Cuanto_Apotamo
                 Email = "Email@email.com",
                 Balance = 215.68f
             };
-            NavigationService.NavigateAsync($"{Constants.Navigation.Root}/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Balance}", user.ToNavigationParameters());
+            NavigationService.NavigateAsync($"{Constants.Navigation.NavigationPage}/{Constants.Navigation.LogIn}", user.ToNavigationParameters());
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

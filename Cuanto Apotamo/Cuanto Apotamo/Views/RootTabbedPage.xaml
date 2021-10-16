@@ -7,12 +7,7 @@
     xmlns:views="clr-namespace:Cuanto_Apotamo.Views"
     x:Name="tabbedPage">
     <TabbedPage.Children>
-        <ContentPage Title="Dos">
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <views:BetView BindingContext="{Binding Bet}" />
-            </StackLayout>
-        </ContentPage>
-        <ContentPage Title="Uno">
+        <ContentPage Title="Main">
             <CollectionView ItemsSource="{Binding Bets}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -22,9 +17,6 @@
                                 Padding="8"
                                 BorderColor="Gray"
                                 CornerRadius="5">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={x:Reference tabbedPage}, Path=BindingContext.TestCommand}" />
-                                </Frame.GestureRecognizers>
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
@@ -60,7 +52,7 @@
                                         Style="{StaticResource TitleLabelStyle}">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Cierre de apuesta: " />
+                                                <Span Text="Bet closes: " />
                                                 <Span Text="{Binding BetClose}" />
                                             </FormattedString>
                                         </Label.FormattedText>
@@ -72,7 +64,7 @@
                                         Style="{StaticResource TitleLabelStyle}">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Total apostado: $" />
+                                                <Span Text="Total bets: $" />
                                                 <Span Text="{Binding TotalBets}" />
                                             </FormattedString>
                                         </Label.FormattedText>
@@ -84,7 +76,7 @@
                                         Style="{StaticResource TitleLabelStyle}">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Total jugadores: " />
+                                                <Span Text="Total players: " />
                                                 <Span Text="{Binding TotalPlayers}" />
                                             </FormattedString>
                                         </Label.FormattedText>
@@ -93,23 +85,68 @@
                                         Grid.Row="4"
                                         Grid.Column="0"
                                         Grid.ColumnSpan="2"
-                                        Text="ppp" />
+                                        Command="{Binding Source={x:Reference tabbedPage}, Path=BindingContext.SelectBetOptionCommand}"
+                                        CommandParameter="{Binding BetOptions[0]}"
+                                        Text="{Binding BetOptions[0].Title}" />
                                     <Button
                                         Grid.Row="4"
                                         Grid.Column="2"
                                         Grid.ColumnSpan="2"
-                                        Text="ppp" />
+                                        Command="{Binding Source={x:Reference tabbedPage}, Path=BindingContext.SelectBetOptionCommand}" 
+                                        CommandParameter="{Binding BetOptions[1]}"
+                                        Text="{Binding BetOptions[1].Title}" />
                                     <Button
                                         Grid.Row="4"
                                         Grid.Column="4"
                                         Grid.ColumnSpan="2"
-                                        Text="ppp" />
+                                        Command="{Binding Source={x:Reference tabbedPage}, Path=BindingContext.SelectBetOptionCommand}"
+                                        CommandParameter="{Binding BetOptions[2]}"
+                                        Text="{Binding BetOptions[2].Title}" />
+                                    <Image
+                                        Grid.Row="5"
+                                        Grid.Column="0"
+                                        Margin="0,5,0,0"
+                                        HeightRequest="5"
+                                        Source="money_icon" />
                                     <Label
                                         Grid.Row="5"
                                         Grid.Column="1"
-                                        Grid.ColumnSpan="4"
-                                        Style="{StaticResource TitleLabelStyle}"
-                                        Text="{Binding Label}" />
+                                        Margin="0,5,0,0"
+                                        FontSize="Medium"
+                                        Text="{Binding SelectedBetOption.TotalBets}"
+                                        VerticalOptions="Center" />
+                                    <Image
+                                        Grid.Row="5"
+                                        Grid.Column="2"
+                                        Margin="0,5,0,0"
+                                        HeightRequest="5"
+                                        Source="trophy" />
+                                    <Label
+                                        Grid.Row="5"
+                                        Grid.Column="3"
+                                        Margin="0,5,0,0"
+                                        FontSize="Medium"
+                                        VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="1:" />
+                                                <Span Text="{Binding SelectedBetOption.Stake}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Image
+                                        Grid.Row="5"
+                                        Grid.Column="4"
+                                        Margin="0,5,0,0"
+                                        HeightRequest="5"
+                                        Source="people" />
+                                    <Label
+                                        Grid.Row="5"
+                                        Grid.Column="5"
+                                        Margin="0,5,0,0"
+                                        FontSize="Medium"
+                                        Text="{Binding SelectedBetOption.TotalPlayers}"
+                                        VerticalOptions="Center" />
                                 </Grid>
                             </Frame>
                             <Label />
@@ -118,10 +155,153 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ContentPage>
-        <ContentPage Title="Tres">
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <views:BetView BindingContext="{Binding Bet}" />
-            </StackLayout>
+        <ContentPage Title="Top Hot">
+            <CollectionView ItemsSource="{Binding Bets}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame
+                                Margin="10"
+                                Padding="8"
+                                BorderColor="Gray"
+                                CornerRadius="5">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="2" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.ColumnSpan="6"
+                                        Style="{StaticResource TitleLabelStyle}"
+                                        Text="{Binding Title}" />
+                                    <BoxView
+                                        Grid.Row="1"
+                                        Grid.ColumnSpan="6"
+                                        HeightRequest="2"
+                                        HorizontalOptions="Fill"
+                                        Color="Gray" />
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.ColumnSpan="6"
+                                        Style="{StaticResource TitleLabelStyle}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Bet closes: " />
+                                                <Span Text="{Binding BetClose}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="3"
+                                        Style="{StaticResource TitleLabelStyle}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Total bets: $" />
+                                                <Span Text="{Binding TotalBets}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                        Grid.Row="3"
+                                        Grid.Column="3"
+                                        Grid.ColumnSpan="3"
+                                        Style="{StaticResource TitleLabelStyle}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Total players: " />
+                                                <Span Text="{Binding TotalPlayers}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Button
+                                        Grid.Row="4"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        Command="{Binding Source={x:Reference tabbedPage}, Path=BindingContext.SelectBetOptionCommand}"
+                                        CommandParameter="{Binding BetOptions[0]}"
+                                        Text="{Binding BetOptions[0].Title}" />
+                                    <Button
+                                        Grid.Row="4"
+                                        Grid.Column="2"
+                                        Grid.ColumnSpan="2"
+                                        Command="{Binding Source={x:Reference tabbedPage}, Path=BindingContext.SelectBetOptionCommand}" 
+                                        CommandParameter="{Binding BetOptions[1]}"
+                                        Text="{Binding BetOptions[1].Title}" />
+                                    <Button
+                                        Grid.Row="4"
+                                        Grid.Column="4"
+                                        Grid.ColumnSpan="2"
+                                        Command="{Binding Source={x:Reference tabbedPage}, Path=BindingContext.SelectBetOptionCommand}"
+                                        CommandParameter="{Binding BetOptions[2]}"
+                                        Text="{Binding BetOptions[2].Title}" />
+                                    <Image
+                                        Grid.Row="5"
+                                        Grid.Column="0"
+                                        Margin="0,5,0,0"
+                                        HeightRequest="5"
+                                        Source="money_icon" />
+                                    <Label
+                                        Grid.Row="5"
+                                        Grid.Column="1"
+                                        Margin="0,5,0,0"
+                                        FontSize="Medium"
+                                        Text="{Binding SelectedBetOption.TotalBets}"
+                                        VerticalOptions="Center" />
+                                    <Image
+                                        Grid.Row="5"
+                                        Grid.Column="2"
+                                        Margin="0,5,0,0"
+                                        HeightRequest="5"
+                                        Source="trophy" />
+                                    <Label
+                                        Grid.Row="5"
+                                        Grid.Column="3"
+                                        Margin="0,5,0,0"
+                                        FontSize="Medium"
+                                        VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="1:" />
+                                                <Span Text="{Binding SelectedBetOption.Stake}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Image
+                                        Grid.Row="5"
+                                        Grid.Column="4"
+                                        Margin="0,5,0,0"
+                                        HeightRequest="5"
+                                        Source="people" />
+                                    <Label
+                                        Grid.Row="5"
+                                        Grid.Column="5"
+                                        Margin="0,5,0,0"
+                                        FontSize="Medium"
+                                        Text="{Binding SelectedBetOption.TotalPlayers}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                            <Label />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </ContentPage>
     </TabbedPage.Children>
 </TabbedPage>

@@ -6,13 +6,14 @@ namespace Cuanto_Apotamo.Models
 {
     class Bet
     {
-        public Bet(string title, float totalBets, int totalPlayers, string betclose,List<BetOption> options)
+        public Bet(string title, float totalBets, int totalPlayers, string betclose, List<BetOption> options)
         {
             Title = title;
             TotalBets = totalBets;
             TotalPlayers = totalPlayers;
             BetClose = betclose;
             BetOptions = options;
+            SelectedBetOption = options[0];
         }
 
         public int Id { get; set; }
@@ -23,6 +24,7 @@ namespace Cuanto_Apotamo.Models
         public int TotalPlayers { get; set; }
         public BetStatus Status { get; set; }
         public DateTime RegistrationDate { get; set; }
+        public BetOption SelectedBetOption { get; set; }
         public List<BetOption> BetOptions { get; set; }
     }
     public enum BetStatus
