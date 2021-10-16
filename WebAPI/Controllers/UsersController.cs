@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
 using WebAPI.Domain;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -21,90 +23,94 @@ namespace WebAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Users
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        // GET: api/Auth
+        [HttpPost]
+        [Route("Authenticate")]
+        public async Task<ActionResult<IResponse>> Authenticate(Credentials credentials)
         {
-            return await _context.Users.ToListAsync();
-        }
-
-        // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
-        }
-
-        // PUT: api/Users/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
-        {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(user).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
+                if (!String.IsNullOrEmpty(credentials.Username) && !String.IsNullOrEmpty(credentials.Password))
                 {
-                    return NotFound();
+                    var user = _context.Users
+                        .Where(s => s.Username == credentials.Username && s.Password == credentials.Password)
+                        .FirstOrDefault<User>();
+                    if(user != null)
+                    {
+                        return Ok(new SuccessResponse(user));
+                    }
+                    else
+                    {
+                        Dictionary<string, string> responseData = new Dictionary<string, string>()
+                        {
+                            { "Not found", $"User not found"}
+                        };
+                        return NotFound(new FailResponse(responseData));
+                    }
                 }
                 else
                 {
-                    throw;
+                    Dictionary<string, string> responseData = new Dictionary<string, string>()
+                    {
+                        {"empty", $"Username or password empty"}
+                    };
+                    return BadRequest(new FailResponse(responseData));
                 }
             }
-
-            return NoContent();
-        }
-
-        // POST: api/Users
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
-        {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
-        }
-
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            catch (Exception err)
             {
-                return NotFound();
+                return StatusCode(500, new ErrorResponse(err.Message));
             }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return user;
         }
 
-        private bool UserExists(int id)
+        [HttpPost]
+        [Route("Create")]
+        public async Task<ActionResult<IResponse>> Create(SignUpForm newUser)
         {
-            return _context.Users.Any(e => e.Id == id);
+            try
+            {
+                // Check that both passwords are equal
+                if (newUser.Password != newUser.ReEnteredPassword)
+                {
+                    Dictionary<string, string> responseData = new Dictionary<string, string>()
+                    {
+                        {"password", "Both passwords must be equal!"}
+                    };
+                    return BadRequest(new FailResponse(responseData));
+                }
+
+                // Basic validation to assure that any property is null
+                foreach (PropertyInfo prop in newUser.GetType().GetProperties())
+                {
+                    if (prop.GetValue(newUser) is null)
+                    {
+                        Dictionary<string, string> responseData = new Dictionary<string, string>()
+                        {
+                            {prop.Name, $"{prop.Name} is required! {prop.GetValue(newUser)} was passed."}
+                        };
+                        return BadRequest(new FailResponse(responseData));
+                    }
+                }
+                User user = new User()
+                {
+                    FullName = newUser.FullName,
+                    Username = newUser.Username,
+                    IdentificationDocument = newUser.IdentificationDocument,
+                    Email = newUser.Email,
+                    CreditCardNumber = newUser.CreditCardNumber,
+                    CVV = newUser.CVV,
+                    CreditCardExpirationDate = newUser.CreditCardExpirationDate,
+                    Password = newUser.Password,
+                    Balance = 250.5f
+                };
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+                return Ok(new SuccessResponse(user));
+            }
+            catch (Exception err)
+            {
+                return StatusCode(500, new ErrorResponse(err.Message));
+            }
         }
     }
 }

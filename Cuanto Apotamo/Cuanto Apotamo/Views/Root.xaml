@@ -7,15 +7,20 @@
     Title="Root">
     <FlyoutPage.ToolbarItems>
         <ToolbarItem
-            Command="{Binding NavigateCommand}"
+            Command="{Binding NavigateWithUserCommand}"
             CommandParameter="balance"
             Priority="0"
             Text="{Binding Money}" />
         <ToolbarItem
             Command="{Binding NavigateCommand}"
-            CommandParameter="search"
-            IconImageSource="search"
-            Priority="1" />
+            CommandParameter="/LogIn"
+            Priority="1"
+            IconImageSource="search"/>
+        <ToolbarItem
+            Command="{Binding NavigateCommand}"
+            CommandParameter="/Navigation/LogIn"
+            Priority="2"
+            IconImageSource="search"/>
     </FlyoutPage.ToolbarItems>
     <FlyoutPage.Flyout>
         <ContentPage Title="Menu">
@@ -23,24 +28,24 @@
                 <StackLayout Margin="0,20,0,10" Orientation="Horizontal">
                     <Image Source="home" Style="{StaticResource FlyoutOptionLeftImage}">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="tabbed" />
+                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="tabbed" />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Label Style="{StaticResource FlyoutOptionLabel}" Text="OtherHome">
+                    <Label Style="{StaticResource FlyoutOptionLabel}" Text="Other Home">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="tabbed" />
+                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="tabbed" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
                 <StackLayout Margin="0,0,0,10" Orientation="Horizontal">
                     <Image Source="fire" Style="{StaticResource FlyoutOptionLeftImage}">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="tabbed" />
+                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="tabbed" />
                         </Image.GestureRecognizers>
                     </Image>
                     <Label Style="{StaticResource FlyoutOptionLabel}" Text="Home">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="tabbed" />
+                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="tabbed" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
@@ -58,12 +63,12 @@
                             <StackLayout Margin="0,0,0,10" Orientation="Horizontal">
                                 <Image Source="grass" Style="{StaticResource FlyoutOptionLeftImage}">
                                     <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateCommand}" CommandParameter="{Binding Title}" />
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateWithUserCommand}" CommandParameter="{Binding Title}" />
                                     </Image.GestureRecognizers>
                                 </Image>
                                 <Label Style="{StaticResource FlyoutOptionLabel}" Text="{Binding Title}">
                                     <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateCommand}" CommandParameter="{Binding Title}" />
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateWithUserCommand}" CommandParameter="{Binding Title}" />
                                     </Label.GestureRecognizers>
                                 </Label>
                                 <Image Source="filled_star" Style="{StaticResource FlyoutOptionRigthColoredImage}">
@@ -83,12 +88,12 @@
                             <StackLayout Margin="0,0,0,10" Orientation="Horizontal">
                                 <Image Source="grass" Style="{StaticResource FlyoutOptionLeftImage}">
                                     <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateCommand}" CommandParameter="{Binding Title}" />
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateWithUserCommand}" CommandParameter="{Binding Title}" />
                                     </Image.GestureRecognizers>
                                 </Image>
                                 <Label Style="{StaticResource FlyoutOptionLabel}" Text="{Binding Title}">
                                     <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateCommand}" CommandParameter="{Binding Title}" />
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference rootPage}, Path=BindingContext.NavigateWithUserCommand}" CommandParameter="{Binding Title}" />
                                     </Label.GestureRecognizers>
                                 </Label>
                                 <Image Source="outlined_star" Style="{StaticResource FlyoutOptionRigthImage}">

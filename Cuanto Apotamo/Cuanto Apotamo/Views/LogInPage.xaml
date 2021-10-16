@@ -45,7 +45,7 @@
         <Label HorizontalOptions="Center">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span FontSize="Medium" Text="¿No tienes cuenta? " />
+                    <Span FontSize="Medium" Text="¿No tienes cuenta? " TextColor="Black"/>
                     <Span
                         FontSize="Medium"
                         Text="¡Crea una!"

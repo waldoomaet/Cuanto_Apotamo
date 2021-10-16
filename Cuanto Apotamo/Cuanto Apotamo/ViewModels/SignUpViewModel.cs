@@ -15,46 +15,52 @@ namespace Cuanto_Apotamo.ViewModels
 {
     class SignUpViewModel : BaseViewModel
     {
-        public User User { get; set; }
-        public string Test { get; set; } = "Prueba";
+        public SignUpForm User { get; set; }
 
         private IPageDialogService _alertService;
-        private ISignUpApiService _signUpService;
+        private IUserApiService _userService;
 
         public ICommand SignUpCommand { get; set; }
-        public SignUpViewModel(INavigationService navigationService, ISignUpApiService signUpApiService, IPageDialogService dialogService) : base(navigationService)
+        public SignUpViewModel(INavigationService navigationService, IUserApiService userService, IPageDialogService dialogService) : base(navigationService)
         {
-            User = new User();
+            User = new SignUpForm();
             SignUpCommand = new DelegateCommand(OnSignUp);
             _alertService = dialogService;
-            _signUpService = signUpApiService;
+            _userService = userService;
         }
         private async void OnSignUp()
         {
-            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+            try
             {
-                var response = await _signUpService.Create(User);
-                if (response.Status == "success")
+                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
                 {
-                    User returnedUser = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
-                    await _alertService.DisplayAlertAsync("Success!", $"{returnedUser.FullName} tu usuario fue creado satisfactoriamente!", "Ok");
-                    var navigationParams = new NavigationParameters { };
-                    await NavigationService.NavigateAsync($"/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Root}/{Constants.Navigation.MainPage}");
-                }
-                else if (response.Status == "fail")
-                {
-                    var returnedData = JsonSerializer.Deserialize<Dictionary<string, string>>(JsonSerializer.Serialize(response.Data));
-                    await _alertService.DisplayAlertAsync("Error", $"{returnedData.First().Value}", "Ok");
+                    var response = await _userService.Create(User);
+                    if (response.Status == "success")
+                    {
+                        User returnedUser = (User)response.Data;
+                        await _alertService.DisplayAlertAsync("Success!", $"{returnedUser.FullName} tu usuario fue creado satisfactoriamente!", "Ok");
+                        await NavigationService.NavigateAsync($"Navigation/tabbed", returnedUser.ToNavigationParameters());
+                    }
+                    else if (response.Status == "fail")
+                    {
+                        var returnedData = JsonSerializer.Deserialize<Dictionary<string, string>>(JsonSerializer.Serialize(response.Data));
+                        await _alertService.DisplayAlertAsync("Error", $"{returnedData.First().Value}", "Ok");
+                    }
+                    else
+                    {
+                        await _alertService.DisplayAlertAsync("Error", $"Algo ocurrio: {response.ErrorMessage}", "Ok");
+                    }
                 }
                 else
                 {
-                    await _alertService.DisplayAlertAsync("Error", $"Algo ocurrio: {response.ErrorMessage}", "Ok");
+                    await _alertService.DisplayAlertAsync("Error", "Compruebe su conexion a Internet", "Ok");
                 }
             }
-            else
+            catch (Exception err)
             {
-                await _alertService.DisplayAlertAsync("Error", "Sin conexión a Internet", "Ok");
+                await _alertService.DisplayAlertAsync("Error", err.Message, "Ok");
             }
+            
         }
     }
 }

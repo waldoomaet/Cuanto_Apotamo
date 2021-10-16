@@ -17,6 +17,7 @@ namespace Cuanto_Apotamo.ViewModels
         public ObservableCollection<FlyoutOption> FavoriteFlyoutOptions { get; set; }
         public FlyoutOption SelectedFavoriteFlyoutOption { get; set; }
         public FlyoutOption SelectedFlyoutOption { get; set; }
+        public ICommand NavigateWithUserCommand { get; set; }
         public ICommand NavigateCommand { get; set; }
         public ICommand StarCommand { get; set; }
         public bool HasFavorites { get; set; }
@@ -32,6 +33,10 @@ namespace Cuanto_Apotamo.ViewModels
             FlyoutOptions = new ObservableCollection<FlyoutOption>() { new FlyoutOption("Politica"), new FlyoutOption("Musica"), new FlyoutOption("Arte") };
             StarCommand = new DelegateCommand<FlyoutOption>(OnStartClicked);
             NavigateCommand = new DelegateCommand<string>(async (string path) =>
+            {
+                await NavigationService.NavigateAsync(path);
+            });
+            NavigateWithUserCommand = new DelegateCommand<string>(async (string path) =>
             {
                 await NavigationService.NavigateAsync($"{Constants.Navigation.NavigationPage}/{path}", _user.ToNavigationParameters());
             });

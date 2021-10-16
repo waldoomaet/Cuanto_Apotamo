@@ -6,6 +6,8 @@ using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows.Input;
 using Xamarin.Essentials;
 
@@ -16,11 +18,11 @@ namespace Cuanto_Apotamo.ViewModels
         public Credentials Credentials { get; set; }
 
         private IPageDialogService _alertService;
-        private ILogInApiService _logInService;
+        private IUserApiService _userService;
 
         public ICommand LogInCommand { get; set; }
         public ICommand CreateAccountCommand { get; set; }
-        public LogInViewModel(INavigationService navigationService, ILogInApiService LogInApiService, IPageDialogService dialogService) : base(navigationService)
+        public LogInViewModel(INavigationService navigationService, IUserApiService userService, IPageDialogService dialogService) : base(navigationService)
         {
             Credentials = new Credentials();
             LogInCommand = new DelegateCommand(OnLogIn);
@@ -29,33 +31,41 @@ namespace Cuanto_Apotamo.ViewModels
                 await NavigationService.NavigateAsync($"{Constants.Navigation.SignUp}");
             });
             _alertService = dialogService;
-            _logInService = LogInApiService;
+            _userService = userService;
         }
         private async void OnLogIn()
         {
-            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+            try
             {
-                var response = await _logInService.Authenticate(Credentials);
-                if (response.Status == "success")
+                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
                 {
-                    await _alertService.DisplayAlertAsync("Success!", $"Tu usuario fue autenticado satisfactoriamente!", "Ok");
-                    // Have to change next line
-                    User returnedUser = (User)response.Data;
-                    var nav = new NavigationParameters(); // Tengo que poner returnedUser aqui
-                    await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/tabbed", nav);
-                }
-                else if (response.Status == "fail")
-                {
-                    await _alertService.DisplayAlertAsync("Error", $"Usuario o Contraseña Incorrectos", "Ok");
+                    var response = await _userService.Authenticate(Credentials);
+                    Console.WriteLine(response.Data);
+                    if (response.Status == "success")
+                    {
+                        await _alertService.DisplayAlertAsync("Success!", $"Tu usuario fue autenticado satisfactoriamente!", "Ok");
+                        //var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
+                        var user = (User)response.Data;
+                        await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/tabbed", user.ToNavigationParameters());
+                    }
+                    else if (response.Status == "fail")
+                    {
+                        await _alertService.DisplayAlertAsync("Error", $"Usuario o Contraseña Incorrectos", "Ok");
+                    }
+                    else
+                    {
+                        await _alertService.DisplayAlertAsync("Error", $"Algo ocurrio: {response.ErrorMessage}", "Ok");
+                    }
                 }
                 else
                 {
-                    await _alertService.DisplayAlertAsync("Error", $"Algo ocurrio: {response.ErrorMessage}", "Ok");
+                    await _alertService.DisplayAlertAsync("Error", "Compruebe su conexion a Internet", "Ok");
                 }
             }
-            else
+            catch (Exception err)
             {
-                await _alertService.DisplayAlertAsync("Error", "Compruebe su conexion a Internet", "Ok");
+
+                await _alertService.DisplayAlertAsync("Error", err.Message, "Ok");
             }
         }
     }
