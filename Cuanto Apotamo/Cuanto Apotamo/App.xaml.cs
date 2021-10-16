@@ -17,7 +17,7 @@ namespace Cuanto_Apotamo
         protected override void OnInitialized()
         {
             InitializeComponent();
-            NavigationService.NavigateAsync($"{Constants.Navigation.NavigationPage}/{Constants.Navigation.Temp}");
+            NavigationService.NavigateAsync($"{Constants.Navigation.NavigationPage}/{Constants.Navigation.LogIn}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

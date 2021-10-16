@@ -16,6 +16,5 @@ namespace Cuanto_Apotamo.ViewModels
         {
             
         }
-
     }
 }

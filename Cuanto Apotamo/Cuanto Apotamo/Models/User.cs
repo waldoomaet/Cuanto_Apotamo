@@ -11,6 +11,9 @@ namespace Cuanto_Apotamo.Models
         public User() { }
         public User(INavigationParameters navigationParameters) : base(navigationParameters) { }
 
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+
         [JsonPropertyName("fullName")]
         public string FullName { get; set; }
 

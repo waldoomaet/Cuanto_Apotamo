@@ -52,9 +52,9 @@ namespace Cuanto_Apotamo.ViewModels
                     var response = await _userService.Create(User);
                     if (response.Status == "success")
                     {
-                        User returnedUser = (User)response.Data;
+                        User returnedUser = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
                         await _alertService.DisplayAlertAsync("Success!", $"{returnedUser.FullName} tu usuario fue creado satisfactoriamente!", "Ok");
-                        await NavigationService.NavigateAsync($"Navigation/tabbed", returnedUser.ToNavigationParameters());
+                        await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/tabbed", returnedUser.ToNavigationParameters());
                     }
                     else if (response.Status == "fail")
                     {
