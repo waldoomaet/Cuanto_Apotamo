@@ -34,7 +34,7 @@ namespace Cuanto_Apotamo.ViewModels
             StarCommand = new DelegateCommand<FlyoutOption>(OnStartClicked);
             NavigateCommand = new DelegateCommand<string>(async (string path) =>
             {
-                await NavigationService.NavigateAsync(path);
+                await NavigationService.NavigateAsync($"/{path}");
             });
             NavigateWithUserCommand = new DelegateCommand<string>(async (string path) =>
             {

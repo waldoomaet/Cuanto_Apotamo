@@ -32,6 +32,21 @@ namespace Cuanto_Apotamo.ViewModels
         {
             try
             {
+                if(User.FullName == "true")
+                {
+                    var user = new User()
+                    {
+                        FullName = "Waldo Ruiz",
+                        Username = "wruiz",
+                        IdentificationDocument = "abc123",
+                        CreditCardNumber = "1234123412341234",
+                        CVV = 123,
+                        CreditCardExpirationDate = DateTime.Now,
+                        Email = "Email@email.com",
+                        Balance = 215.68f
+                    };
+                    await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/tabbed", user.ToNavigationParameters());
+                }
                 if (Connectivity.NetworkAccess == NetworkAccess.Internet)
                 {
                     var response = await _userService.Create(User);

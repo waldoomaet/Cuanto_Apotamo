@@ -13,14 +13,14 @@
             Text="{Binding Money}" />
         <ToolbarItem
             Command="{Binding NavigateCommand}"
-            CommandParameter="/LogIn"
+            CommandParameter="tabbed"
             Priority="1"
             IconImageSource="search"/>
         <ToolbarItem
             Command="{Binding NavigateCommand}"
-            CommandParameter="/Navigation/LogIn"
+            CommandParameter="LogIn"
             Priority="2"
-            IconImageSource="search"/>
+            IconImageSource="logout"/>
     </FlyoutPage.ToolbarItems>
     <FlyoutPage.Flyout>
         <ContentPage Title="Menu">
