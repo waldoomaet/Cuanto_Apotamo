@@ -1,21 +1,21 @@
 ﻿using Cuanto_Apotamo.Models;
+using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace Cuanto_Apotamo.ViewModels
 {
     class TempViewModel : BaseViewModel
     {
-        public Bet Bet { get; set; } = new Bet("titulo", 1000, "te la entierro", "donde hay tierra", 25);
-
+        public BetViewModel bet { get; set; }
+        
         public TempViewModel(INavigationService navigationService) : base(navigationService)
         {
             
         }
-
-
 
     }
 }
