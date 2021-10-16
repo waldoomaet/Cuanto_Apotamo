@@ -24,7 +24,7 @@ namespace Cuanto_Apotamo.Models
         public string Email { get; set; }
 
         [JsonPropertyName("creditCardNumber")]
-        public Int64? CreditCardNumber { get; set; }
+        public string CreditCardNumber { get; set; }
 
         [JsonPropertyName("cvv")]
         public int? CVV { get; set; }
@@ -34,9 +34,6 @@ namespace Cuanto_Apotamo.Models
 
         [JsonPropertyName("password")]
         public string Password { get; set; }
-
-        [JsonPropertyName("reEnteredPassword")]
-        public string ReEnteredPassword { get; set; }
 
         [JsonPropertyName("balance")]
         public float Balance { get; set; }
