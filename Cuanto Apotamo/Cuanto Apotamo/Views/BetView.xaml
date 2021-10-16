@@ -9,11 +9,6 @@
     Padding="8"
     BorderColor="Gray"
     CornerRadius="5">
-    <Frame.GestureRecognizers>
-        <TapGestureRecognizer Command="{Binding Path=BindingContext.TestCommand}">
-            
-        </TapGestureRecognizer>
-    </Frame.GestureRecognizers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

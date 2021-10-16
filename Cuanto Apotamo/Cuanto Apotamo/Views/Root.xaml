@@ -8,12 +8,12 @@
     <FlyoutPage.ToolbarItems>
         <ToolbarItem
             Command="{Binding NavigateWithUserCommand}"
-            CommandParameter="balance"
+            CommandParameter="Balance"
             Priority="0"
             Text="{Binding Money}" />
         <ToolbarItem
-            Command="{Binding NavigateCommand}"
-            CommandParameter="tabbed"
+            Command="{Binding NavigateWithUserCommand}"
+            CommandParameter="Search"
             Priority="1"
             IconImageSource="search"/>
         <ToolbarItem
@@ -28,24 +28,24 @@
                 <StackLayout Margin="0,20,0,10" Orientation="Horizontal">
                     <Image Source="home" Style="{StaticResource FlyoutOptionLeftImage}">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="tabbed" />
+                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="Tabbed" />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Label Style="{StaticResource FlyoutOptionLabel}" Text="Other Home">
+                    <Label Style="{StaticResource FlyoutOptionLabel}" Text="Home">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="tabbed" />
+                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="Tabbed" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
                 <StackLayout Margin="0,0,0,10" Orientation="Horizontal">
                     <Image Source="fire" Style="{StaticResource FlyoutOptionLeftImage}">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="tabbed" />
+                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="Tabbed" />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Label Style="{StaticResource FlyoutOptionLabel}" Text="Home">
+                    <Label Style="{StaticResource FlyoutOptionLabel}" Text="Top Apuestas">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="tabbed" />
+                            <TapGestureRecognizer Command="{Binding NavigateWithUserCommand}" CommandParameter="Tabbed" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>

@@ -7,7 +7,7 @@ namespace Cuanto_Apotamo.Models
 {
     public class TransactionForm
     {
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public float Balance { get; set; }
     }
 }

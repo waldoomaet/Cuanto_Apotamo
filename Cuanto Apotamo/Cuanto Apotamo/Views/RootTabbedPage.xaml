@@ -3,8 +3,10 @@
     x:Class="Cuanto_Apotamo.Views.RootTabbedPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:Cuanto_Apotamo.Views">
-    <TabbedPage.Children >
+    xmlns:control="clr-namespace:Plugin.Segmented.Control;assembly=Plugin.Segmented"
+    xmlns:views="clr-namespace:Cuanto_Apotamo.Views"
+    x:Name="tabbedPage">
+    <TabbedPage.Children>
         <ContentPage Title="Dos">
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <views:BetView BindingContext="{Binding Bet}" />
@@ -13,10 +15,104 @@
         <ContentPage Title="Uno">
             <CollectionView ItemsSource="{Binding Bets}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate >
+                    <DataTemplate>
                         <StackLayout>
-                            <views:BetView BindingContext="{Binding}"/>
-                            <Label/>
+                            <Frame
+                                Margin="10"
+                                Padding="8"
+                                BorderColor="Gray"
+                                CornerRadius="5">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference tabbedPage}, Path=BindingContext.TestCommand}" />
+                                </Frame.GestureRecognizers>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="2" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.ColumnSpan="6"
+                                        Style="{StaticResource TitleLabelStyle}"
+                                        Text="{Binding Title}" />
+                                    <BoxView
+                                        Grid.Row="1"
+                                        Grid.ColumnSpan="6"
+                                        HeightRequest="2"
+                                        HorizontalOptions="Fill"
+                                        Color="Gray" />
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.ColumnSpan="6"
+                                        Style="{StaticResource TitleLabelStyle}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Cierre de apuesta: " />
+                                                <Span Text="{Binding BetClose}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="3"
+                                        Style="{StaticResource TitleLabelStyle}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Total apostado: $" />
+                                                <Span Text="{Binding TotalBets}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                        Grid.Row="3"
+                                        Grid.Column="3"
+                                        Grid.ColumnSpan="3"
+                                        Style="{StaticResource TitleLabelStyle}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Total jugadores: " />
+                                                <Span Text="{Binding TotalPlayers}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Button
+                                        Grid.Row="4"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        Text="ppp" />
+                                    <Button
+                                        Grid.Row="4"
+                                        Grid.Column="2"
+                                        Grid.ColumnSpan="2"
+                                        Text="ppp" />
+                                    <Button
+                                        Grid.Row="4"
+                                        Grid.Column="4"
+                                        Grid.ColumnSpan="2"
+                                        Text="ppp" />
+                                    <Label
+                                        Grid.Row="5"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="4"
+                                        Style="{StaticResource TitleLabelStyle}"
+                                        Text="{Binding Label}" />
+                                </Grid>
+                            </Frame>
+                            <Label />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

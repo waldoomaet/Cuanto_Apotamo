@@ -32,7 +32,8 @@ namespace Cuanto_Apotamo.ViewModels
         {
             try
             {
-                if(User.FullName == "true")
+                // This is an API bypass
+                if (User.FullName == "true")
                 {
                     var user = new User()
                     {
@@ -45,7 +46,7 @@ namespace Cuanto_Apotamo.ViewModels
                         Email = "Email@email.com",
                         Balance = 215.68f
                     };
-                    await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/tabbed", user.ToNavigationParameters());
+                    await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Tab}", user.ToNavigationParameters());
                 }
                 if (Connectivity.NetworkAccess == NetworkAccess.Internet)
                 {
@@ -53,29 +54,28 @@ namespace Cuanto_Apotamo.ViewModels
                     if (response.Status == "success")
                     {
                         User returnedUser = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
-                        await _alertService.DisplayAlertAsync("Success!", $"{returnedUser.FullName} tu usuario fue creado satisfactoriamente!", "Ok");
-                        await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/tabbed", returnedUser.ToNavigationParameters());
+                        await _alertService.DisplayAlertAsync(Constants.SignUp.SuccessTitle, $"{returnedUser.FullName} {Constants.SignUp.SuccessMessage}", Constants.SignUp.SuccessButton);
+                        await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Tab}", returnedUser.ToNavigationParameters());
                     }
                     else if (response.Status == "fail")
                     {
                         var returnedData = JsonSerializer.Deserialize<Dictionary<string, string>>(JsonSerializer.Serialize(response.Data));
-                        await _alertService.DisplayAlertAsync("Error", $"{returnedData.First().Value}", "Ok");
+                        await _alertService.DisplayAlertAsync(Constants.SignUp.FailTitle, returnedData.First().Value, Constants.SignUp.FailButton);
                     }
                     else
                     {
-                        await _alertService.DisplayAlertAsync("Error", $"Algo ocurrio: {response.ErrorMessage}", "Ok");
+                        await _alertService.DisplayAlertAsync(Constants.SignUp.ErrorTitle, response.ErrorMessage, Constants.SignUp.ErrorButton);
                     }
                 }
                 else
                 {
-                    await _alertService.DisplayAlertAsync("Error", "Compruebe su conexion a Internet", "Ok");
+                    await _alertService.DisplayAlertAsync(Constants.SignUp.ErrorTitle, Constants.SignUp.InternetError, Constants.SignUp.ErrorButton);
                 }
             }
             catch (Exception err)
             {
-                await _alertService.DisplayAlertAsync("Error", err.Message, "Ok");
+                await _alertService.DisplayAlertAsync(Constants.SignUp.ErrorTitle, err.Message, Constants.SignUp.ErrorButton);
             }
-            
         }
     }
 }

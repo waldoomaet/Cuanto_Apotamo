@@ -13,12 +13,18 @@ namespace Cuanto_Apotamo.ViewModels
     {
         public User User { get; set; }
         public ObservableCollection<Bet> Bets { get; set; }
+        public int test { get; set; } = 0;
         public ICommand TestCommand { get; set; }
+        public ICommand SelectBetOptionCommand { get; set; }
         public RootTabbedViewModel(INavigationService navigationService) : base(navigationService)
         {
             TestCommand = new DelegateCommand(() => 
             { 
-                Console.WriteLine("Hola"); 
+                Console.WriteLine(test); 
+            });
+            SelectBetOptionCommand = new DelegateCommand(() => 
+            {
+                Console.WriteLine(test);
             });
             Bets = new ObservableCollection<Bet>() 
             { 

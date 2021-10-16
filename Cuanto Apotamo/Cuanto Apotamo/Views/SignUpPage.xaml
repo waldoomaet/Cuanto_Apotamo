@@ -3,49 +3,51 @@
     x:Class="Cuanto_Apotamo.Views.SignUpPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Sign-up"
+    Title="Account Creation"
     BackgroundColor="White">
-    <StackLayout>
-        <Entry
-            Placeholder="Full Name"
-            Text="{Binding User.FullName}"
-            TextColor="Black" />
-        <Entry
-            Placeholder="Username"
-            Text="{Binding User.Username}"
-            TextColor="Black" />
-        <Entry
-            Placeholder="Identification Document"
-            Text="{Binding User.IdentificationDocument}"
-            TextColor="Black" />
-        <Entry
-            Placeholder="Email"
-            Text="{Binding User.Email}"
-            TextColor="Black" />
-        <Entry
-            Keyboard="Numeric"
-            Placeholder="Credit Card Number"
-            Text="{Binding User.CreditCardNumber}"
-            TextColor="Black" />
-        <Entry
-            Keyboard="Numeric"
-            Placeholder="CVV"
-            Text="{Binding User.CVV}"
-            TextColor="Black" />
-        <DatePicker Date="{Binding User.CreditCardExpirationDate}" TextColor="Black" />
-        <Entry
-            IsPassword="True"
-            Placeholder="Password"
-            Text="{Binding User.Password}"
-            TextColor="Black" />
-        <Entry
-            IsPassword="True"
-            Placeholder="Re-enter password"
-            Text="{Binding User.ReEnteredPassword}"
-            TextColor="Black" />
-        <Button
-            Command="{Binding SignUpCommand}"
-            Text="Sign-Up!"
-            TextColor="Black" />
-    </StackLayout>
+    <ScrollView>
+        <StackLayout>
+            <Entry
+                Placeholder="Full Name"
+                Style="{StaticResource SignUpEntry}"
+                Text="{Binding User.FullName}" />
+            <Entry
+                Placeholder="Username"
+                Style="{StaticResource SignUpEntry}"
+                Text="{Binding User.Username}" />
+            <Entry
+                Placeholder="Identification Document"
+                Style="{StaticResource SignUpEntry}"
+                Text="{Binding User.IdentificationDocument}" />
+            <Entry
+                Placeholder="Email"
+                Style="{StaticResource SignUpEntry}"
+                Text="{Binding User.Email}" />
+            <Entry
+                Keyboard="Numeric"
+                Placeholder="Credit Card Number"
+                Style="{StaticResource SignUpEntry}"
+                Text="{Binding User.CreditCardNumber}" />
+            <Entry
+                Keyboard="Numeric"
+                Placeholder="CVV"
+                Style="{StaticResource SignUpEntry}"
+                Text="{Binding User.CVV}" />
+            <DatePicker Date="{Binding User.CreditCardExpirationDate}" Style="{StaticResource SignUpEntry}" />
+            <Entry
+                IsPassword="True"
+                Placeholder="Password"
+                Style="{StaticResource SignUpEntry}"
+                Text="{Binding User.Password}" />
+            <Entry
+                IsPassword="True"
+                Placeholder="Re-enter password"
+                Style="{StaticResource SignUpEntry}"
+                Text="{Binding User.ReEnteredPassword}" />
+            <Button
+                Command="{Binding SignUpCommand}"
+                Text="Create!"
+                TextColor="Black" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

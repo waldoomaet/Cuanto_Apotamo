@@ -37,7 +37,8 @@ namespace Cuanto_Apotamo.ViewModels
         {
             try
             {
-                if(Credentials.UserName == "true" && Credentials.Password == "true")
+                // This is an API bypass
+                if (Credentials.UserName == "true" && Credentials.Password == "true")
                 {
                     var user = new User()
                     {
@@ -50,7 +51,7 @@ namespace Cuanto_Apotamo.ViewModels
                         Email = "Email@email.com",
                         Balance = 215.68f
                     };
-                    await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/tabbed", user.ToNavigationParameters());
+                    await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Tab}", user.ToNavigationParameters());
                 }
                 if (Connectivity.NetworkAccess == NetworkAccess.Internet)
                 {
@@ -58,29 +59,28 @@ namespace Cuanto_Apotamo.ViewModels
                     Console.WriteLine(response.Data);
                     if (response.Status == "success")
                     {
-                        await _alertService.DisplayAlertAsync("Success!", $"Tu usuario fue autenticado satisfactoriamente!", "Ok");
-                        //var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
+                        // await _alertService.DisplayAlertAsync(Constants.LogIn.SuccessTitle, Constants.LogIn.SuccessMessage, Constants.LogIn.SuccessButton);
                         var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
-                        await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/tabbed", user.ToNavigationParameters());
+                        await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Tab}", user.ToNavigationParameters());
                     }
                     else if (response.Status == "fail")
                     {
-                        await _alertService.DisplayAlertAsync("Error", $"Usuario o Contraseña Incorrectos", "Ok");
+                        await _alertService.DisplayAlertAsync(Constants.LogIn.FailTitle, Constants.LogIn.FailMessage, Constants.LogIn.FailButton);
                     }
                     else
                     {
-                        await _alertService.DisplayAlertAsync("Error", $"Algo ocurrio: {response.ErrorMessage}", "Ok");
+                        await _alertService.DisplayAlertAsync(Constants.LogIn.ErrorTitle, response.ErrorMessage, Constants.LogIn.ErrorButton);
                     }
                 }
                 else
                 {
-                    await _alertService.DisplayAlertAsync("Error", "Compruebe su conexion a Internet", "Ok");
+                    await _alertService.DisplayAlertAsync(Constants.LogIn.ErrorTitle, Constants.LogIn.InternetError, Constants.LogIn.ErrorButton);
                 }
             }
             catch (Exception err)
             {
 
-                await _alertService.DisplayAlertAsync("Error", err.Message, "Ok");
+                await _alertService.DisplayAlertAsync(Constants.LogIn.ErrorTitle, err.Message, Constants.LogIn.ErrorButton);
             }
         }
     }

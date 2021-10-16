@@ -7,6 +7,7 @@ using Xamarin.Forms.Xaml;
 using Cuanto_Apotamo.Views;
 using Cuanto_Apotamo.ViewModels;
 using Cuanto_Apotamo.Services;
+using Cuanto_Apotamo.Models;
 
 namespace Cuanto_Apotamo
 {
@@ -17,14 +18,26 @@ namespace Cuanto_Apotamo
         protected override void OnInitialized()
         {
             InitializeComponent();
-            NavigationService.NavigateAsync($"{Constants.Navigation.NavigationPage}/{Constants.Navigation.LogIn}");
+            var user = new User()
+            {
+                Id = 1,
+                FullName = "Waldo Ruiz",
+                Username = "wruiz",
+                IdentificationDocument = "abc123",
+                CreditCardNumber = "1234123412341234",
+                CVV = 123,
+                CreditCardExpirationDate = DateTime.Now,
+                Email = "Email@email.com",
+                Balance = 215.68f
+            };
+            NavigationService.NavigateAsync($"{Constants.Navigation.Root}/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Balance}", user.ToNavigationParameters());
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<RootTabbedPage, RootTabbedViewModel>("tabbed");
-            containerRegistry.RegisterForNavigation<BalancePage, BalanceViewModel>("balance");
-            containerRegistry.RegisterForNavigation<SearchPage>("search");
+            containerRegistry.RegisterForNavigation<RootTabbedPage, RootTabbedViewModel>(Constants.Navigation.Tab);
+            containerRegistry.RegisterForNavigation<BalancePage, BalanceViewModel>(Constants.Navigation.Balance);
+            containerRegistry.RegisterForNavigation<SearchPage>(Constants.Navigation.Search);
             containerRegistry.RegisterForNavigation<NavigationPage>(Constants.Navigation.NavigationPage);
             containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(Constants.Navigation.MainPage);
             containerRegistry.RegisterForNavigation<Root, RootViewModel>(Constants.Navigation.Root);

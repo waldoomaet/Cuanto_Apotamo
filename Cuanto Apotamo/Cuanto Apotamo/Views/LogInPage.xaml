@@ -8,32 +8,31 @@
         Margin="0,50,0,30"
         Padding="30"
         HorizontalOptions="Center"
-        VerticalOptions="Center">
+        VerticalOptions="StartAndExpand">
         <Image
             HorizontalOptions="Center"
-            Source="logo.png"
-            WidthRequest="300" />
+            Source="main_icon"
+            WidthRequest="600" />
 
         <Entry
-            Margin="5,0,5,5"
+            Margin="5,0,5,20"
             HeightRequest="40"
-            Placeholder="Usuario"
+            Placeholder="Username"
             PlaceholderColor="Black"
             Text="{Binding Credentials.UserName}"
             TextColor="Black" />
 
         <Entry
-            Margin="5,0,5,10"
+            Margin="5,0,5,20"
             HeightRequest="40"
             IsPassword="True"
-            Placeholder="Contraseña"
+            Placeholder="Password"
             PlaceholderColor="Black"
             Text="{Binding Credentials.Password}"
             TextColor="Black" />
 
-
         <Button
-            Margin="0,0,0,10"
+            Margin="0,0,0,20"
             BackgroundColor="Black"
             Command="{Binding LogInCommand}"
             FontAttributes="Bold"
@@ -45,10 +44,10 @@
         <Label HorizontalOptions="Center">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span FontSize="Medium" Text="¿No tienes cuenta? " TextColor="Black"/>
+                    <Span FontSize="Medium" Text="Don't have an account? " TextColor="Black"/>
                     <Span
                         FontSize="Medium"
-                        Text="¡Crea una!"
+                        Text="Create one!"
                         TextColor="Blue"
                         TextDecorations="Underline">
                         <Span.GestureRecognizers>

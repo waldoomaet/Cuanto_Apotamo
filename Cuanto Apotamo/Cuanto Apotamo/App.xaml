@@ -7,6 +7,10 @@
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
     <Application.Resources>
         <ResourceDictionary>
+            <Style x:Key="SignUpEntry" TargetType="Entry">
+                <Setter Property="Margin" Value="0,0,0,20"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
             <Style x:Key="FlyoutOptionLabel" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="TextColor" Value="Black" />

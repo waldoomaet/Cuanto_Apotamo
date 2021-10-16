@@ -6,6 +6,7 @@ using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Windows.Input;
 using Xamarin.Essentials;
 
@@ -31,13 +32,12 @@ namespace Cuanto_Apotamo.ViewModels
         {
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
-                TransactionForm withdraw = new TransactionForm();
+                TransactionForm withdraw = new TransactionForm() { UserId = User.Id, Balance = OperationAmount };
                 var response = await _userService.Withdraw(withdraw);
                 if (response.Status == "success")
                 {
                     await _alertService.DisplayAlertAsync("Success!", $"Operación completada con éxito.!", "Ok");
-                    //var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
-                    var user = (User)response.Data;
+                    var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
                     await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/balance", user.ToNavigationParameters());
                 }
                 else if (response.Status == "fail")
@@ -59,13 +59,12 @@ namespace Cuanto_Apotamo.ViewModels
         {
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
-                TransactionForm withdraw = new TransactionForm();
+                TransactionForm withdraw = new TransactionForm() { UserId = User.Id, Balance = OperationAmount };
                 var response = await _userService.Withdraw(withdraw);
                 if (response.Status == "success")
                 {
                     await _alertService.DisplayAlertAsync("Success!", $"Operación completada con éxito.!", "Ok");
-                    //var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
-                    var user = (User)response.Data;
+                    var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
                     await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/balance", user.ToNavigationParameters());
                 }
                 else if (response.Status == "fail")

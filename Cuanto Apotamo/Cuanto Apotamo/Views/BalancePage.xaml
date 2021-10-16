@@ -9,9 +9,9 @@
 
                 <Image
                     HorizontalOptions="Center"
-                    Source="logo.png"
+                    Source="money"
                     VerticalOptions="Start"
-                    WidthRequest="200" />               
+                    WidthRequest="200" />
 
                 <Label
                     Margin="0,15,0,15"
@@ -21,15 +21,24 @@
                     TextColor="Black">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span FontAttributes="Bold" FontSize="36" Text="Balance:" TextColor="Black" />
-                            <Span Text="$" FontAttributes="Bold"  FontSize="20" TextColor="Black" />
-                            <Span Text="{Binding User.Balance}" FontAttributes="Bold"  FontSize="20" TextColor="Black" />
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="36"
+                                Text="Balance:    "
+                                TextColor="Black" />
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="26"
+                                Text="$"
+                                TextColor="Black" />
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="26"
+                                Text="{Binding User.Balance}"
+                                TextColor="Black" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-
-                
-
                 <Grid ColumnDefinitions="*,50,50,*" RowDefinitions="*,*">
                     <Entry
                         Grid.Row="0"
@@ -37,25 +46,25 @@
                         Grid.ColumnSpan="2"
                         Margin="5,0,5,10"
                         HeightRequest="40"
-                        WidthRequest="50"
+                        HorizontalTextAlignment="Center"
                         Keyboard="Numeric"
                         Text="{Binding OperationAmount}"
-                        TextColor="Black" 
-                        HorizontalTextAlignment="Center"/>
+                        TextColor="Black"
+                        WidthRequest="50" />
                     <Button
                         Grid.Row="1"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
+                        Command="{Binding DepositCommand}"
                         FontAttributes="None"
-                        Text="Agregar al balance"
-                        Command="{Binding DepositCommand}"/>
+                        Text="Agregar al balance" />
                     <Button
                         Grid.Row="1"
                         Grid.Column="2"
                         Grid.ColumnSpan="2"
+                        Command="{Binding WithdrawCommand}"
                         FontAttributes="None"
-                        Text="Retirar al banco"
-                        Command="{Binding WithdrawCommand}"/>
+                        Text="Retirar al banco" />
                 </Grid>
 
                 <Label
@@ -69,7 +78,6 @@
                     <StackLayout>
                         <BindableLayout.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
-                                <x:String>This must be changed for an API call that brings the latest transactions</x:String>
                                 <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
                                 <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
                                 <x:String>22/julio/2020 &lt;---&gt; -$90</x:String>
