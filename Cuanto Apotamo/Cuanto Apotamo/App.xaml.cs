@@ -45,6 +45,7 @@ namespace Cuanto_Apotamo
             containerRegistry.RegisterForNavigation<LogInPage, LogInViewModel>(Constants.Navigation.LogIn);
             containerRegistry.RegisterForNavigation<TempPage, TempViewModel>(Constants.Navigation.Temp);
             containerRegistry.Register<IUserApiService, UserApiService>();
+            containerRegistry.Register<IBetApiService, BetApiService>();
         }
     }
 }

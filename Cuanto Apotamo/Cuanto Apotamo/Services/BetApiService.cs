@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Cuanto_Apotamo.Services
 {
-    class LogInApiService : ILogInApiService
+    class BetApiService : IBetApiService
     {
         private static HttpClient _client = new HttpClient();
-        public LogInApiService()
+        public BetApiService()
         {
             _client.BaseAddress = new Uri(Constants.Url.Api);
         }
-        public async Task<LogInApiResponse> Authenticate(Credentials userCredentials)
+        public async Task<BetsApiResponse> GetBets(string category)
         {
-            var response = await _client.PostAsync("LogIn/Authenticate", new StringContent(JsonSerializer.Serialize(userCredentials), Encoding.UTF8, "application/json"));
+            var response = await _client.GetAsync($"{Constants.Url.BetsPath}{category}");
             var responseString = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<LogInApiResponse>(responseString);
+            return JsonSerializer.Deserialize<BetsApiResponse>(responseString);
         }
     }
 }

@@ -13,6 +13,13 @@ namespace WebAPI.Domain
     }
     public class Bet
     {
+        public Bet(string title, float totalBets, int totalPlayers, string betclose, List<BetOption> options)
+        {
+            Title = title;
+            TotalBets = totalBets;
+            TotalPlayers = totalPlayers;
+            BetOptions = options;
+        }
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

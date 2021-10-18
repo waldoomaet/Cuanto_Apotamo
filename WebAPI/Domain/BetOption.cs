@@ -7,6 +7,13 @@ namespace WebAPI.Domain
 {
     public class BetOption
     {
+        public BetOption(string title, float totalBets, int totalPlayers, float stake)
+        {
+            Title = title;
+            TotalBets = totalBets;
+            TotalPlayers = totalPlayers;
+            Stake = stake;
+        }
         public int Id { get; set; }
         public int BetId { get; set; }
         public Bet Bet { get; set; }

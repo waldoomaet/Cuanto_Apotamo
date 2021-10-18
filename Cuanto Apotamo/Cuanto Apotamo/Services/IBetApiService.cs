@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Cuanto_Apotamo.Services
 {
-    interface ILogInApiService
+    interface IBetApiService
     {
-        Task<LogInApiResponse> Authenticate(Credentials userCredentials);
+        Task<BetsApiResponse> GetBets(string category);
     }
 }

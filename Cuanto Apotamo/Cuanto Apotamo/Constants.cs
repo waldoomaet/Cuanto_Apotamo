@@ -22,6 +22,11 @@ namespace Cuanto_Apotamo.Services
         public static class Url
         {
             public const string Api = "http://192.168.0.105:45457/api/";
+            public const string SignUpPath = "Users/Create";
+            public const string LogInPath = "Users/Authenticate";
+            public const string DepositPath = "Users/Deposit";
+            public const string WithdrawPath = "Users/Withdraw";
+            public const string BetsPath = "Bets?category";
         }
 
         public static class LogIn
@@ -48,6 +53,35 @@ namespace Cuanto_Apotamo.Services
             public const string ErrorTitle = "Error";
             public const string InternetError = "Sorry, we're having issues with Internet right now";
             public const string ErrorButton = "Ok";
+        }
+        public static class Bets
+        {
+            public const string FailTitle = "Fail";
+            public const string FailMessage = "Fail";
+            public const string FailButton = "Ok";
+            public const string ErrorTitle = "Error";
+            public const string InternetError = "Sorry, we're having issues with Internet right now";
+            public const string ErrorButton = "Ok";
+        }
+
+        public static class Balance
+        {
+            public const string SuccessTitle = "Success!";
+            public const string SuccessMessage = "Operation successfull!";
+            public const string SuccessButton = "Ok";
+            public const string FailTitle = "Fail";
+            public const string FailMessage = "Fail";
+            public const string FailButton = "Ok";
+            public const string ErrorTitle = "Error";
+            public const string InternetError = "Sorry, we're having issues with Internet right now";
+            public const string ErrorButton = "Ok";
+        }
+
+        public static class ApiResponse
+        {
+            public const string Success = "success";
+            public const string Fail = "fail";
+            public const string Error = "error";
         }
     }
 }

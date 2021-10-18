@@ -57,13 +57,13 @@ namespace Cuanto_Apotamo.ViewModels
                 {
                     var response = await _userService.Authenticate(Credentials);
                     Console.WriteLine(response.Data);
-                    if (response.Status == "success")
+                    if (response.Status == Constants.ApiResponse.Success)
                     {
-                        // await _alertService.DisplayAlertAsync(Constants.LogIn.SuccessTitle, Constants.LogIn.SuccessMessage, Constants.LogIn.SuccessButton);
+                        await _alertService.DisplayAlertAsync(Constants.LogIn.SuccessTitle, Constants.LogIn.SuccessMessage, Constants.LogIn.SuccessButton);
                         var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
                         await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Tab}", user.ToNavigationParameters());
                     }
-                    else if (response.Status == "fail")
+                    else if (response.Status == Constants.ApiResponse.Fail)
                     {
                         await _alertService.DisplayAlertAsync(Constants.LogIn.FailTitle, Constants.LogIn.FailMessage, Constants.LogIn.FailButton);
                     }

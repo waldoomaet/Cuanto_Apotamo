@@ -34,24 +34,24 @@ namespace Cuanto_Apotamo.ViewModels
             {
                 TransactionForm withdraw = new TransactionForm() { UserId = User.Id, Balance = OperationAmount };
                 var response = await _userService.Withdraw(withdraw);
-                if (response.Status == "success")
+                if (response.Status == Constants.ApiResponse.Success)
                 {
-                    await _alertService.DisplayAlertAsync("Success!", $"Operación completada con éxito.!", "Ok");
+                    await _alertService.DisplayAlertAsync(Constants.Balance.SuccessTitle, Constants.Balance.SuccessMessage, Constants.Balance.SuccessButton);
                     var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
-                    await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/balance", user.ToNavigationParameters());
+                    await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Balance}", user.ToNavigationParameters());
                 }
-                else if (response.Status == "fail")
+                else if (response.Status == Constants.ApiResponse.Success)
                 {
-                    await _alertService.DisplayAlertAsync("Error", $"Usuario o Contraseña Incorrectos", "Ok");
+                    await _alertService.DisplayAlertAsync(Constants.Balance.FailTitle, Constants.Balance.FailMessage, Constants.Balance.FailButton);
                 }
                 else
                 {
-                    await _alertService.DisplayAlertAsync("Error", $"Algo ocurrio: {response.ErrorMessage}", "Ok");
+                    await _alertService.DisplayAlertAsync(Constants.Balance.ErrorTitle, $"{response.ErrorMessage}", Constants.Balance.ErrorButton);
                 }
             }
             else
             {
-                await _alertService.DisplayAlertAsync("Error", "Compruebe su conexion a Internet", "Ok");
+                await _alertService.DisplayAlertAsync(Constants.Balance.ErrorTitle, Constants.Balance.InternetError, Constants.Balance.ErrorButton);
             }
         }
 
@@ -60,25 +60,25 @@ namespace Cuanto_Apotamo.ViewModels
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
                 TransactionForm withdraw = new TransactionForm() { UserId = User.Id, Balance = OperationAmount };
-                var response = await _userService.Withdraw(withdraw);
-                if (response.Status == "success")
+                var response = await _userService.Deposit(withdraw);
+                if (response.Status == Constants.ApiResponse.Success)
                 {
-                    await _alertService.DisplayAlertAsync("Success!", $"Operación completada con éxito.!", "Ok");
+                    await _alertService.DisplayAlertAsync(Constants.Balance.SuccessTitle, Constants.Balance.SuccessMessage, Constants.Balance.SuccessButton);
                     var user = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(response.Data));
-                    await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/Navigation/balance", user.ToNavigationParameters());
+                    await NavigationService.NavigateAsync($"/{Constants.Navigation.Root}/{Constants.Navigation.NavigationPage}/{Constants.Navigation.Balance}", user.ToNavigationParameters());
                 }
-                else if (response.Status == "fail")
+                else if (response.Status == Constants.ApiResponse.Success)
                 {
-                    await _alertService.DisplayAlertAsync("Error", $"Usuario o Contraseña Incorrectos", "Ok");
+                    await _alertService.DisplayAlertAsync(Constants.Balance.FailTitle, Constants.Balance.FailMessage, Constants.Balance.FailButton);
                 }
                 else
                 {
-                    await _alertService.DisplayAlertAsync("Error", $"Algo ocurrio: {response.ErrorMessage}", "Ok");
+                    await _alertService.DisplayAlertAsync(Constants.Balance.ErrorTitle, $"{response.ErrorMessage}", Constants.Balance.ErrorButton);
                 }
             }
             else
             {
-                await _alertService.DisplayAlertAsync("Error", "Compruebe su conexion a Internet", "Ok");
+                await _alertService.DisplayAlertAsync(Constants.Balance.ErrorTitle, Constants.Balance.InternetError, Constants.Balance.ErrorButton);
             }
         }
 
